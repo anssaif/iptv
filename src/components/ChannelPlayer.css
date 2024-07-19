@@ -1,0 +1,32 @@
+/* Page Reference: ChannelPlayer.css */
+
+.channel-list {
+  background-color: #f5f5f5;
+  padding: 10px;
+  height: calc(100vh - 20px);
+  display: flex;
+  flex-direction: column;
+}
+
+.MuiListItem-root {
+  border-bottom: 1px solid #ddd;
+}
+
+.MuiListItem-root:hover {
+  background-color: #e0e0e0;
+}
+
+.channel-list-content {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: #f5f5f5;
+  position: sticky;
+  bottom: 0;
+  border-top: 1px solid #ddd;
+}

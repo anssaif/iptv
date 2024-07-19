@@ -1,16 +1,6 @@
+/* src/App.css */
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -24,15 +14,29 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.channel-list {
+  margin: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.channel-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.channel-list li {
+  cursor: pointer;
+  margin: 5px 0;
+  padding: 10px;
+  background-color: #61dafb;
+  border-radius: 4px;
+}
+
+.channel-list li:hover {
+  background-color: #21a1f1;
+}
+
+.video-player {
+  width: 80%;
+  max-width: 800px;
+  margin: 20px auto;
 }
