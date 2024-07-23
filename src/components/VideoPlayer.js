@@ -1,11 +1,12 @@
-// src/components/VideoPlayer.js
-
-import React, { useEffect, useRef } from 'react';
+// VideoPlayer.js
+import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
 import PropTypes from 'prop-types';
+import VideoControls from './VideoControls';
 
-const VideoPlayer = ({ url }) => {
+const VideoPlayer = ({ url, onNext, onPrevious }) => {
   const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -31,7 +32,6 @@ const VideoPlayer = ({ url }) => {
           case Hls.ErrorDetails.FRAG_LOAD_ERROR:
             console.error('Fragment load error');
             break;
-          // Handle other errors here
           default:
             break;
         }
@@ -45,24 +45,14 @@ const VideoPlayer = ({ url }) => {
     }
   }, [url]);
 
-  const handleError = (e) => {
-    console.error('Error occurred while playing video:', e);
-  };
-
-  const handlePlay = () => {
-    console.log('Video started playing');
-  };
-
-  const handlePause = () => {
-    console.log('Video paused');
-  };
-
-  const handleEnded = () => {
-    console.log('Video ended');
-  };
-
-  const handleProgress = (state) => {
-    console.log('Video progress:', state);
+  const handlePlayPause = () => {
+    const video = videoRef.current;
+    if (isPlaying) {
+      video.pause();
+    } else {
+      video.play();
+    }
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -72,11 +62,14 @@ const VideoPlayer = ({ url }) => {
         controls
         width="100%"
         height="100%"
-        onError={handleError}
-        onPlay={handlePlay}
-        onPause={handlePause}
-        onEnded={handleEnded}
-        onTimeUpdate={handleProgress}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+      <VideoControls
+        isPlaying={isPlaying}
+        onPlayPause={handlePlayPause}
+        onNext={onNext}
+        onPrevious={onPrevious}
       />
     </div>
   );
@@ -84,6 +77,8 @@ const VideoPlayer = ({ url }) => {
 
 VideoPlayer.propTypes = {
   url: PropTypes.string.isRequired,
+  onNext: PropTypes.func.isRequired,
+  onPrevious: PropTypes.func.isRequired,
 };
 
 export default VideoPlayer;

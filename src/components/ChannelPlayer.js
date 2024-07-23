@@ -1,5 +1,4 @@
-// src/components/ChannelPlayer.js
-
+// ChannelPlayer.js
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, CircularProgress } from '@mui/material';
 import VideoPlayer from './VideoPlayer';
@@ -24,7 +23,7 @@ const ChannelPlayer = ({ category }) => {
     const fetchChannels = async () => {
       const channelsFromDB = await getChannelsFromDB();
       const filteredByCategory = channelsFromDB.filter(channel => channel.group === category);
-      console.log(`Channels fetched for category "${category}":`, filteredByCategory); // <-- Log fetched channels
+      console.log(`Channels fetched for category "${category}":`, filteredByCategory);
       setChannels(filteredByCategory);
       setFilteredChannels(filteredByCategory.slice(0, ITEMS_PER_PAGE));
       if (filteredByCategory.length > 0) {
@@ -33,7 +32,7 @@ const ChannelPlayer = ({ category }) => {
       setLoading(false);
     };
     fetchChannels();
-  }, [category]); // <-- Category is used to determine which channels to fetch
+  }, [category]);
 
   const handleSearchChange = (event) => {
     const term = event.target.value.toLowerCase();
@@ -65,7 +64,7 @@ const ChannelPlayer = ({ category }) => {
     setTimeout(() => {
       setUrl(filteredChannels[index].url);
       setLoading(false);
-      console.log(`Selected URL: ${filteredChannels[index].url}, Group: ${filteredChannels[index].group}`); // <-- Log selected channel URL and group
+      console.log(`Selected URL: ${filteredChannels[index].url}, Group: ${filteredChannels[index].group}`);
     }, 500);
   };
 
@@ -92,7 +91,7 @@ const ChannelPlayer = ({ category }) => {
         {loading ? (
           <CircularProgress />
         ) : (
-          <VideoPlayer url={url} />
+          <VideoPlayer url={url} onNext={handleNext} onPrevious={handlePrevious} />
         )}
       </Box>
     </Box>

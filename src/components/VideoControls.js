@@ -1,23 +1,31 @@
-// Page Reference: VideoControls.js
-
+// VideoControls.js
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@mui/material';
+import { IconButton } from '@mui/material';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 
-const VideoControls = ({ onPlay, onPause, onNext, onPrevious }) => {
+const VideoControls = ({ isPlaying, onPlayPause, onNext, onPrevious }) => {
   return (
     <div className="video-controls">
-      <Button onClick={onPlay}>Play</Button>
-      <Button onClick={onPause}>Pause</Button>
-      <Button onClick={onPrevious}>Previous</Button>
-      <Button onClick={onNext}>Next</Button>
+      <IconButton onClick={onPrevious}>
+        <SkipPreviousIcon />
+      </IconButton>
+      <IconButton onClick={onPlayPause}>
+        {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+      </IconButton>
+      <IconButton onClick={onNext}>
+        <SkipNextIcon />
+      </IconButton>
     </div>
   );
 };
 
 VideoControls.propTypes = {
-  onPlay: PropTypes.func.isRequired,
-  onPause: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  onPlayPause: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
   onPrevious: PropTypes.func.isRequired,
 };
